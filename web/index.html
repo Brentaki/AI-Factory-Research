@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Factory Equity Research | TAFGS Growth Leaderboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card-hover: rgba(30, 41, 59, 0.85);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.10) 0px, transparent 50%);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            padding-bottom: 60px;
+            line-height: 1.5;
+        }
+
+        /* Header Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .brand-title h1 {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-title p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border: none;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        /* Hero Formula Section */
+        .formula-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .formula-text h2 {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .formula-text p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .formula-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-family: monospace;
+            font-size: 15px;
+            color: #a5b4fc;
+        }
+
+        .formula-box span {
+            color: var(--accent-emerald);
+            font-weight: 600;
+        }
+
+        /* Section Titles */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Capital Stack Grid */
+        .capital-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .stack-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .stack-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .stack-pulse {
+            animation: glowPulse 0.8s ease-out;
+        }
+
+        @keyframes glowPulse {
+            0% { border-color: var(--accent-emerald); box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
+            100% { border-color: var(--border-glass); box-shadow: none; }
+        }
+
+        .stack-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .stack-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .stack-val {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--accent-emerald);
+            font-size: 15px;
+        }
+
+        .progress-bg {
+            background: rgba(255, 255, 255, 0.05);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-emerald));
+            border-radius: 3px;
+        }
+
+        .stack-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Leaderboard Table */
+        .leaderboard-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 16px 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-glass);
+            font-size: 14px;
+        }
+
+        tr.row-clickable {
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        tr.row-clickable:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .rank-badge {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .rank-1 { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.4); }
+        .rank-2 { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
+        .rank-3 { background: rgba(217, 119, 6, 0.2); color: #f97316; border: 1px solid rgba(217, 119, 6, 0.4); }
+
+        .ticker-pill {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 15px;
+            color: #a5b4fc;
+        }
+
+        .company-name-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .score-pill {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .moat-pill { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.3); }
+        .margin-pill { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+        
+        .tafgs-score {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 18px;
+            color: #6ee7b7;
+        }
+
+        /* Modal Drawer */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: #0f172a;
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: var(--text-muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .modal-close:hover { color: white; background: rgba(255, 255, 255, 0.15); }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .modal-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .modal-box h4 {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .modal-box p {
+            font-size: 14px;
+        }
+
+        /* Terminal Console */
+        .terminal-overlay {
+            margin-top: 32px;
+            background: #050811;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #34d399;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <div class="brand-logo">AI</div>
+            <div class="brand-title">
+                <h1>AI Factory Equity Research</h1>
+                <p>LangGraph Agentic Network | Stargate Capital Stack Engine</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="btn" onclick="fetchCapitalStack()">Refresh Capital Stack</button>
+            <button class="btn btn-primary" onclick="runResearchPipeline()">⚡ Run Live Research Agent</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Formula Banner -->
+        <div class="formula-card">
+            <div class="formula-text">
+                <h2>Total AI Factory Growth Score (TAFGS)</h2>
+                <p>Systematically ranking public equities best positioned for 3-Year revenue growth from AI Factory builds.</p>
+            </div>
+            <div class="formula-box">
+                TAFGS = (<span>Moat Score [0-5]</span> × <span>Margin Score [1-5]</span>) × <span>3-Yr CAGR %</span> × (1 - Risk)
+            </div>
+        </div>
+
+        <!-- Terminal Output -->
+        <div class="terminal-overlay" id="terminalLog"></div>
+
+        <!-- Capital Stack Allocation -->
+        <div class="section-header">
+            <h2>AI Factory Capital Stack ($60.97B Stargate Model)</h2>
+            <span id="stackLastSynced" style="font-size: 13px; color: var(--accent-emerald); font-weight: 500; background: rgba(16, 185, 129, 0.1); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(16, 185, 129, 0.3);">Synced live</span>
+        </div>
+        <div class="capital-stack-grid" id="capitalStackGrid">
+            <!-- Dynamically populated -->
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="section-header">
+            <h2>Top 20 Growth Leaderboard</h2>
+            <p style="color: var(--text-muted); font-size: 14px;">Ordered by TAFGS Score | Click company for deep-dive</p>
+        </div>
+
+        <div class="leaderboard-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Equity</th>
+                        <th>Primary Role</th>
+                        <th>Moat Score</th>
+                        <th>Op Margin (Score)</th>
+                        <th>3-Yr CAGR %</th>
+                        <th>Risk Discount</th>
+                        <th>TAFGS Score</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <!-- Dynamically populated -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Company Detail Modal -->
+    <div class="modal-overlay" id="companyModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div id="modalContent">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchCapitalStack() {
+            const btn = document.querySelector("button[onclick='fetchCapitalStack()']");
+            if (btn) btn.innerHTML = '⌛ Syncing...';
+            try {
+                const res = await fetch('/api/capital-stack');
+                const data = await res.json();
+                const grid = document.getElementById('capitalStackGrid');
+                grid.innerHTML = '';
+                
+                const now = new Date().toLocaleTimeString();
+                const timeTag = document.getElementById('stackLastSynced');
+                if (timeTag) timeTag.innerHTML = `Synced at ${now}`;
+
+                data.layers.forEach(layer => {
+                    const card = document.createElement('div');
+                    card.className = 'stack-card stack-pulse';
+                    card.innerHTML = `
+                        <div class="stack-header">
+                            <span class="stack-name">${layer.category}</span>
+                            <span class="stack-val">$${(layer.stargate_allocation_millions / 1000).toFixed(2)}B</span>
+                        </div>
+                        <div class="progress-bg">
+                            <div class="progress-fill" style="width: ${Math.min(layer.percentage_share * 1.2, 100)}%"></div>
+                        </div>
+                        <div class="stack-meta">${layer.percentage_share}% of total spend • Key: ${layer.representative_companies.slice(0, 2).join(', ')}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                // Show toast visual feedback
+                const term = document.getElementById('terminalLog');
+                term.style.display = 'block';
+                term.innerHTML = `<span style="color: #34d399;">[Market Mapping Agent] ✅ Stargate Capital Stack refreshed (${data.layers.length} layers, $${(data.total_stargate_budget_millions/1000).toFixed(2)}B baseline) at ${now}</span><br>` + term.innerHTML;
+
+            } catch (err) {
+                console.error("Error fetching capital stack:", err);
+            } finally {
+                if (btn) btn.innerHTML = '🔄 Refresh Capital Stack';
+            }
+        }
+
+        async function fetchRankings() {
+            try {
+                const res = await fetch('/api/rankings');
+                const data = await res.json();
+                const body = document.getElementById('leaderboardBody');
+                body.innerHTML = '';
+
+                data.top_20.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.className = 'row-clickable';
+                    row.onclick = () => openCompanyModal(item.ticker);
+                    
+                    const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
+                    
+                    row.innerHTML = `
+                        <td><div class="rank-badge ${rankClass}">#${item.rank}</div></td>
+                        <td>
+                            <div class="ticker-pill">${item.ticker}</div>
+                            <div class="company-name-sub">${item.company_name}</div>
+                        </td>
+                        <td>${item.primary_sector}</td>
+                        <td><span class="score-pill moat-pill">${item.moat.score.toFixed(1)} / 5.0</span></td>
+                        <td><span class="score-pill margin-pill">${item.margin.actual_operating_margin_pct.toFixed(1)}% (${item.margin.score}/5)</span></td>
+                        <td><strong style="color: #38bdf8;">${item.growth.forecast_3yr_cagr_pct.toFixed(1)}%</strong></td>
+                        <td><span style="color: var(--text-muted);">${(item.risk.total_risk_discount_pct * 100).toFixed(1)}%</span></td>
+                        <td><div class="tafgs-score">${item.risk_adjusted_tafgs.toFixed(2)}</div></td>
+                    `;
+                    body.appendChild(row);
+                });
+            } catch (err) {
+                console.error("Error fetching rankings:", err);
+            }
+        }
+
+        async function openCompanyModal(ticker) {
+            try {
+                const res = await fetch(`/api/company/${ticker}`);
+                const data = await res.json();
+                const item = data.evaluation;
+                const modal = document.getElementById('companyModal');
+                const content = document.getElementById('modalContent');
+
+                content.innerHTML = `
+                    <div style="margin-bottom: 20px;">
+                        <span class="score-pill moat-pill" style="font-size: 14px;">Rank #${item.rank} • TAFGS Score: ${item.risk_adjusted_tafgs}</span>
+                        <h2 style="font-family: var(--font-heading); font-size: 28px; margin-top: 8px;">${item.company_name} (${item.ticker})</h2>
+                        <p style="color: var(--text-muted);">${item.primary_sector}</p>
+                    </div>
+
+                    <div class="modal-grid">
+                        <div class="modal-box">
+                            <h4>Moat & Defensibility (${item.moat.score}/5.0)</h4>
+                            <p>${item.moat.rationale}</p>
+                            <div style="margin-top: 10px; font-size: 12px; color: var(--text-muted);">
+                                Architectural Lock-in: ${item.moat.architectural_lockin ? 'YES' : 'NO'} | Switching Costs: ${item.moat.switching_cost_rating}
+                            </div>
+                        </div>
+
+                        <div class="modal-box">
+                            <h4>Operating Margin Profile (${item.margin.score}/5.0)</h4>
+                            <p>${item.margin.rationale}</p>
+                            <div style="margin-top: 10px; font-size: 12px; color: var(--text-muted);">
+                                Margin: ${item.margin.actual_operating_margin_pct}% | Pricing Power: ${item.margin.pricing_power_rating}
+                            </div>
+                        </div>
+
+                        <div class="modal-box">
+                            <h4>3-Year Growth Catalysts (${item.growth.forecast_3yr_cagr_pct}% CAGR)</h4>
+                            <ul style="padding-left: 18px; font-size: 13px; color: #cbd5e1;">
+                                ${item.growth.product_cycle_drivers.map(c => `<li>${c}</li>`).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="modal-box">
+                            <h4>Risk Discount Factor (${(item.risk.total_risk_discount_pct*100).toFixed(1)}%)</h4>
+                            <p>${item.risk.risk_summary}</p>
+                            <div style="margin-top: 10px; font-size: 12px; color: var(--text-muted);">
+                                Exec Risk: ${(item.risk.execution_risk*100).toFixed(0)}% | Customer Conc: ${(item.risk.customer_concentration_risk*100).toFixed(0)}%
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                modal.style.display = 'flex';
+            } catch (err) {
+                console.error("Error opening company modal:", err);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('companyModal').style.display = 'none';
+        }
+
+        async function runResearchPipeline() {
+            const term = document.getElementById('terminalLog');
+            term.style.display = 'block';
+            term.innerHTML = '> Launching Multi-Agent State Graph Pipeline...<br>';
+
+            try {
+                const res = await fetch('/api/run-research', { method: 'POST' });
+                const data = await res.json();
+                
+                data.execution_logs.forEach(log => {
+                    term.innerHTML += `> ${log}<br>`;
+                });
+                term.scrollTop = term.scrollHeight;
+
+                await fetchRankings();
+            } catch (err) {
+                term.innerHTML += `> Error running pipeline: ${err}<br>`;
+            }
+        }
+
+        // Initialize on page load
+        window.onload = () => {
+            fetchCapitalStack();
+            fetchRankings();
+        };
+    </script>
+</body>
+</html>
